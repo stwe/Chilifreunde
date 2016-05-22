@@ -1,0 +1,48 @@
+services:
+
+    # Forms
+    app.form.extension.novalidate:
+        class: AppBundle\Form\Extension\NoValidateExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    app.form.type.profile:
+        class: AppBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: app_user_profile }
+    app.form.type.plant:
+        class: AppBundle\Form\PlantType
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+        tags:
+            - { name: form.type, alias: appbundle_plant }
+    app.form.extension.file:
+        class: AppBundle\Form\Extension\FileTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+
+    # User
+    fos.user.activity.listener:
+        class: AppBundle\Listener\ActivityListener
+        arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+    app.user_checker:
+        class: AppBundle\Security\Core\User\UserChecker
+
+    # Datatables
+    app.datatable.chili:
+        class: AppBundle\Datatables\ChiliDatatable
+        parent: sg_datatables.datatable.abstract
+    app.datatable.source:
+        class: AppBundle\Datatables\SourceDatatable
+        parent: sg_datatables.datatable.abstract
+    app.datatable.season:
+        class: AppBundle\Datatables\SeasonDatatable
+        parent: sg_datatables.datatable.abstract
+    app.datatable.plant:
+        class: AppBundle\Datatables\PlantDatatable
+        parent: sg_datatables.datatable.abstract
+    app.datatable.address:
+        class: AppBundle\Datatables\AddressDatatable
+        parent: sg_datatables.datatable.abstract

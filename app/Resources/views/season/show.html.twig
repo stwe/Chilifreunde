@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Saison</h2>
+    <h3>von: {{ season.user }}</h3>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titel:</th>
+                <td>{{ season.title }}</td>
+            </tr>
+            <tr>
+                <th>Beschreibung:</th>
+                <td>{{ season.description }}</td>
+            </tr>
+            <tr>
+                <th>Start:</th>
+                <td>{% if season.start is not empty %}{{ season.start|date('d.m.Y') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ende:</th>
+                <td>{% if season.end is not empty %}{{ season.end|date('d.m.Y') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Pflanzen</h3>
+    {{ datatable_render(plants_datatable) }}
+
+    <hr>
+
+    {% if app.user and is_granted('ROLE_USER') and season.isOwner(app.user) %}
+        <a href="{{ path('season_edit', { 'id': season.id }) }}" class="btn btn-primary">Ändern</a>
+    {% endif %}
+
+    <a href="{{ path('season_private') }}" class="btn btn-primary">Meine Anbaulisten</a>
+    <a href="{{ path('season_public') }}" class="btn btn-primary">Alle Anbaulisten</a>
+
+    <hr>
+
+    <h3>Beiträge <span class="badge">{{ posts.getTotalItemCount }}</span></h3>
+
+    {% for post in posts %}
+        {% include(':post:post.html.twig') %}
+    {% else %}
+        <div class="alert alert-info" role="alert">Für diese Saison gibt es bisher keine Beiträge.</div>
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(posts) }}
+    </div>
+
+    <a href="{{ path('post_new', { 'seasonId': season.id }) }}" class="btn btn-primary">Neuer Beitrag</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Saison erstellen</h2>
+    <hr>
+    {% include ":season:form.html.twig" %}
+    <a href="{{ path('season_private') }}" class="btn btn-primary">Meine Anbaulisten</a>
+    <a href="{{ path('season_public') }}" class="btn btn-primary">Alle Anbaulisten</a>
+{% endblock %}

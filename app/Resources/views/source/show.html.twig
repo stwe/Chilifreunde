@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>
+        {{ entity.name }}
+        {% if entity.public %}
+            <span class="badge progress-bar-success">öffentlich</span>
+        {% else %}
+            <span class="badge progress-bar-danger">privater Eintrag von: {{ entity.user }}</span>
+        {% endif %}
+    </h2>
+
+    <hr>
+
+    <h3>Adressen</h3>
+    {{ datatable_render(address_datatable) }}
+
+    <hr>
+
+    {% if app.user and is_granted('ROLE_USER') and entity.isOwner(app.user) and not entity.public %}
+        <a href="{{ path('source_edit', { 'id': entity.id }) }}" class="btn btn-primary">Ändern</a>
+    {% endif %}
+{% endblock %}

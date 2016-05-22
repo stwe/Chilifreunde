@@ -1,0 +1,37 @@
+easy_admin:
+    site_name: 'Chilifreunde.eu'
+    entities:
+        Benutzer:
+            class: AppBundle\Entity\User
+            list:
+                fields:
+                    - id
+                    - username
+                    - email
+            form:
+                fields:
+                    - username
+                    - email
+                    - roles
+                    - enabled
+                    - plainPassword
+        Adressen:
+            class: AppBundle\Entity\Address
+        Chilis:
+            class: AppBundle\Entity\Chili
+        Anbaulisten:
+            class: AppBundle\Entity\Season
+        Beiträge:
+            class: AppBundle\Entity\Post
+        Bezugsquellen:
+            class: AppBundle\Entity\Source
+        Fruchtfarben:
+            class: AppBundle\Entity\Fruitcolor
+        Schärfegrade:
+            class: AppBundle\Entity\Heat
+        Reifezeiten:
+            class: AppBundle\Entity\Maturity
+        Arten:
+            class: AppBundle\Entity\Species
+        Verwendung:
+            class: AppBundle\Entity\ChiliUsage

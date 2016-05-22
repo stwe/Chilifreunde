@@ -1,0 +1,19 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a href="{{ path('post_show', { 'id': post.id }) }}">{{ post.title }}</a>
+            {% if app.user and is_granted('ROLE_USER') and post.isOwner(app.user) %}
+                <a href="{{ path('post_edit', { 'id': post.id }) }}" class="btn btn-default btn-xs pull-right">
+                    <i class="glyphicon glyphicon-edit"></i> Ändern
+                </a>
+            {% endif %}
+        </h4>
+    </div>
+    <div class="panel-body">
+        {{ post.content(500) }}
+        <p class="continue"><a href="{{ path('post_show', { 'id': post.id }) }}">Beitrag lesen ...</a></p>
+    </div>
+    <div class="panel-footer">
+        Erstellt von: <span class="highlight">{{ post.user }}</span> am {{ post.publishedAt|date('d.m.y') }}
+    </div>
+</div>

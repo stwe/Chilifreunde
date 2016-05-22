@@ -1,0 +1,80 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>
+        {{ entity.name }}
+        {% if entity.public %}
+            <span class="badge progress-bar-success">öffentlich</span>
+        {% else %}
+            <span class="badge progress-bar-danger">privater Eintrag von: {{ entity.user }}</span>
+        {% endif %}
+    </h2>
+
+    <div class="row">
+        {% for image in entity.images %}
+            <div class="col-sm-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('images/' ~ image.fileName) | imagine_filter('thumbnail_192_x_200') }}" />
+                    <div class="caption">
+                        <h3>{{ image.title }}</h3>
+                        <p>{{ image.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name:</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Alternative Namen:</th>
+                <td>{{ entity.alternativeNames|join(', ') }}</td>
+            </tr>
+            <tr>
+                <th>Beschreibung:</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Schärfe:</th>
+                <td>{{ entity.heat }}</td>
+            </tr>
+            <tr>
+                <th>Herkunft:</th>
+                <td>{{ entity.origin }}</td>
+            </tr>
+            <tr>
+                <th>Wuchs:</th>
+                <td>{{ entity.growth }}</td>
+            </tr>
+            <tr>
+                <th>Fruchtfarbe:</th>
+                <td>{{ entity.fruitcolor }}</td>
+            </tr>
+            <tr>
+                <th>Reifezeit:</th>
+                <td>{{ entity.maturity }}</td>
+            </tr>
+            <tr>
+                <th>Art:</th>
+                <td>{{ entity.species }}</td>
+            </tr>
+            {% if entity.usages|length > 0 %}
+            <tr>
+                <th>Verwendung:</th>
+                <td>{{ entity.usages|join(', ') }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    {% if app.user and is_granted('ROLE_USER') and entity.isOwner(app.user) and not entity.public %}
+        <a href="{{ path('chili_edit', { 'id': entity.id }) }}" class="btn btn-primary">Ändern</a>
+    {% endif %}
+
+    <a href="{{ path('chili_private') }}" class="btn btn-primary">Meine Chilidatenbank</a>
+    <a href="{{ path('chili_public') }}" class="btn btn-primary">Öffentliche Chilidatenbank</a>
+{% endblock %}

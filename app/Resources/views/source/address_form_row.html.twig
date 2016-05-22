@@ -1,0 +1,66 @@
+{% macro addressRow(address) %}
+    <tr>
+        <td>
+            {{ form_errors(address.company) }}
+            {{ form_widget(address.company) }}
+        </td>
+        <td>
+            {{ form_errors(address.name) }}
+            {{ form_widget(address.name) }}
+        </td>
+        <td>
+            {{ form_errors(address.street) }}
+            {{ form_widget(address.street) }}
+        </td>
+        <td>
+            {{ form_errors(address.postcode) }}
+            {{ form_widget(address.postcode) }}
+        </td>
+        <td>
+            {{ form_errors(address.city) }}
+            {{ form_widget(address.city) }}
+        </td>
+        <td>
+            {{ form_errors(address.country) }}
+            {{ form_widget(address.country) }}
+        </td>
+        <td>
+            <a href="javascript:void(0);" class="delete-row btn btn-danger">
+                <i class="fa fa-remove"></i>
+            </a>
+        </td>
+    </tr>
+{% endmacro %}
+
+<script type="text/html" id="nl">{{ _self.addressRow (form.addresses.vars.prototype) }}</script>
+
+<hr>
+
+<p><b>Adressen</b></p>
+
+<table id="addressesTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Firma</th>
+            <th>Name *</th>
+            <th>Straße</th>
+            <th>PLZ *</th>
+            <th>Ort *</th>
+            <th>Land</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for address in form.addresses %}
+            {{ _self.addressRow(address) }}
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <button type="button" id="addAddress" class="btn bt-small btn-primary">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+</div>
+
+<hr>

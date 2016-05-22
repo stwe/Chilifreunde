@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {% include ':source:address_form_row.html.twig' %}
+    {{ form_row(form._token) }}
+    {{ form_row(form.submit) }}
+{{ form_end(form, {'render_rest': false}) }}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var index = $("#addressesTable tbody tr").length;
+
+        function add() {
+            $("#addressesTable tbody").append($('#nl').html().replace(/\_\_name\_\_/g, index));
+        }
+
+        $("#addAddress").click(function() {
+            add();
+        });
+
+        $(document).on("click", "form a.delete-row", function () {
+            $(this).closest('tr').remove();
+        });
+    })
+</script>

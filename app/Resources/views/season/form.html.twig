@@ -1,0 +1,167 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.start) }}
+    {{ form_row(form.end) }}
+    {% include ':season:plant_form_row.html.twig' %}
+    {{ form_row(form._token) }}
+    {{ form_row(form.submit) }}
+{{ form_end(form, {'render_rest': false}) }}
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $('.season-datepicker-start').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            locale: {
+                format: 'DD.MM.YYYY',
+                applyLabel: 'Übernehmen',
+                cancelLabel: 'Abbruch',
+                fromLabel: 'Von',
+                toLabel: 'Bis',
+                daysOfWeek: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr','Sa'],
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                firstDay: 1
+            }
+        });
+
+        $('.season-datepicker-end').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            locale: {
+                format: 'DD.MM.YYYY',
+                applyLabel: 'Übernehmen',
+                cancelLabel: 'Abbruch',
+                fromLabel: 'Von',
+                toLabel: 'Bis',
+                daysOfWeek: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr','Sa'],
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                firstDay: 1
+            }
+        });
+
+        $('.season-datepicker-start').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD.MM.YYYY'));
+        });
+
+        $('.season-datepicker-end').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD.MM.YYYY'));
+        });
+
+        var rowsPublic = document.getElementsByClassName("plant_row_public");
+        var rowsSpecies = document.getElementsByClassName("plant_row_species");
+        var rowsChili = document.getElementsByClassName("plant_row_chili");
+        if (rowsSpecies.length > 0) {
+            for (var index = 0; index < rowsSpecies.length; ++index) {
+                var publicId = rowsPublic[index].getAttribute('id');
+                var speciesId = rowsSpecies[index].getAttribute('id');
+                var chiliId = rowsChili[index].getAttribute('id');
+                publicId = publicId.replace('td_', '');
+                speciesId = speciesId.replace('td_', '');
+                chiliId = chiliId.replace('td_', '');
+                $("#" + speciesId).change(function() {
+                    var species = $(this).val();
+                    var pub = false;
+                    if ($("#" + publicId).is(":checked")) {
+                        pub = true;
+                    }
+                    if ('' != species) {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('get_chilis') }}",
+                            data: {'species_id': species, 'public': pub},
+                            success: function (data) {
+                                $("#" + chiliId).html('');
+                                $.each(data, function (k, v) {
+                                    $("#" + chiliId).append('<option value="' + v + '">' + k + '</option>');
+                                });
+                            }
+                        });
+                    }
+                    return false;
+                });
+                $("#" + publicId).change(function() {
+                    var species = $("#" + speciesId).val();
+                    var pub = false;
+                    if(this.checked) {
+                        pub = true;
+                    }
+                    if ('' != species) {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('get_chilis') }}",
+                            data: {'species_id': species, 'public': pub},
+                            success: function (data) {
+                                $("#" + chiliId).html('');
+                                $.each(data, function (k, v) {
+                                    $("#" + chiliId).append('<option value="' + v + '">' + k + '</option>');
+                                });
+                            }
+                        });
+                    }
+                    return false;
+                });
+            }
+        }
+
+        function ajaxRequest(index, species, pub) {
+            $.ajax({
+                type: "POST",
+                url: "{{ url('get_chilis') }}",
+                data: {'species_id': species, 'public': pub},
+                success: function (data) {
+                    $("#season_plants_" + index + "_chili").html('');
+                    $.each(data, function (k, v) {
+                        $("#season_plants_" + index + "_chili").append('<option value="' + v + '">' + k + '</option>');
+                    });
+                }
+            });
+        }
+
+        var lengthIndex = $("#plantsTable tbody tr").length;
+
+        function add() {
+            var index = lengthIndex;
+            $("#plantsTable tbody").append($('#nl').html().replace(/\_\_name\_\_/g, index));
+
+            $("#season_plants_" + index + "_species").change(function() {
+                var species = $(this).val();
+                var pub = false;
+                if ($("#season_plants_"+ index +"_public").is(":checked")) {
+                    pub = true;
+                }
+                if ('' != species) {
+                    ajaxRequest(index, species, pub);
+                }
+
+                return false;
+            });
+
+            $("#season_plants_" + index + "_public").change(function() {
+                var species = $("#season_plants_" + index + "_species").val();
+                var pub = false;
+                if(this.checked) {
+                    pub = true;
+                }
+
+                ajaxRequest(index, species, pub);
+
+                return false;
+            });
+        }
+
+        $("#addPlant" ).click(function() {
+            add();
+            lengthIndex = lengthIndex + 1;
+        });
+
+        $(document).on("click", "form a.delete-row", function () {
+            $(this).closest('tr').remove();
+        });
+    });
+</script>

@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Beitrag ändern</h2>
+    <hr>
+
+    {% include ":post:form.html.twig" with { "form": edit_form } %}
+    {{ form(delete_form) }}
+    <a href="{{ path('season_show', { 'id': entity.season.id }) }}" class="btn btn-primary">Zurück zur Saison</a>
+{% endblock %}

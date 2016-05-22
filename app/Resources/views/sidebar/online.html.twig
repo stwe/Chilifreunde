@@ -1,0 +1,9 @@
+<div class="list-group">
+    <a href="{{ path('online') }}" class="list-group-item active"><i class="fa fa-users"></i> Zurzeit aktive Benutzer</a>
+    <div class="list-group-item">
+        {% for user in users %}
+            <a href="{{ path('member', {'id': user.id }) }}"> {{ user.username }}</a>
+        {% endfor %}
+        <h5><small>Mitglieder: {{ users|length }}</small></h5>
+    </div>
+</div>

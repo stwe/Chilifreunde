@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>{{ user.username }}</h2>
+    <hr>
+    <h3>Öffentliches Profil</h3>
+    <table class="table">
+        <tr>
+            <td>Mitglied seit:</td>
+            <td>{{ user.createdAt|date('d.m.Y') }}</td>
+        </tr>
+        <tr>
+            <td>Anbaulisten:</td>
+            <td>{{ user.seasons|length }}</td>
+        </tr>
+        <tr>
+            <td>Einträge in der privaten Chili-Datenbank:</td>
+            <td>{{ user.chilis|length }}</td>
+        </tr>
+        <tr>
+            <td>Beiträge:</td>
+            <td>{{ user.posts|length }}</td>
+        </tr>
+    </table>
+{% endblock %}

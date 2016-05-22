@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    Saisonverwaltung für den Chilianbau.
+    {% if not is_granted('ROLE_USER') %}
+        <a href="{{ path('fos_user_security_login') }}">Melden Sie sich an</a> oder <a href="{{ path('fos_user_registration_register') }}">registrieren</a> Sie sich kostenlos mit Ihrer E-Mail.
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+<div class="list-group">
+    <div class="list-group-item active"><i class="fa fa-tasks"></i> Letzte Beiträge</div>
+    {% for post in posts %}
+        <div class="list-group-item">
+            <p><a href="{# path('post_show', {'id': post.id}) #}">{{ post.title }}</a> </p>
+            <h5><small>Erstellt von <a href="{# path('member', {'userId': post.user.id }) #}"> {{ post.user.username }}</a> in der Saison <a href="{# path('season_show', {'id': post.season.id}) #}">{{ post.season.title }}</a> </small></h5>
+        </div>
+    {% endfor %}
+</div>

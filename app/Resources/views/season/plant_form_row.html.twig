@@ -1,0 +1,75 @@
+{% macro plantRow(plant, publicId, speciesId, chiliId) %}
+    <tr class="plant_row">
+        <td id="td_{{ publicId }}" class="plant_row_public">
+            {{ form_errors(plant.public) }}
+            {{ form_widget(plant.public) }}
+        </td>
+        <td id="td_{{ speciesId }}" class="plant_row_species">
+            {{ form_errors(plant.species) }}
+            {{ form_widget(plant.species) }}
+        </td>
+        <td id="td_{{ chiliId }}" class="plant_row_chili">
+            {{ form_errors(plant.chili) }}
+            {{ form_widget(plant.chili) }}
+        </td>
+        <td>
+            {{ form_errors(plant.sowing) }}
+            {{ form_widget(plant.sowing) }}
+        </td>
+        {#
+        <td>
+            {{ form_errors(plant.quantity) }}
+            {{ form_widget(plant.quantity) }}
+        </td>
+        #}
+        <td>
+            {{ form_errors(plant.source) }}
+            {{ form_widget(plant.source) }}
+        </td>
+        {#
+        <td>
+            {{ form_errors(plant.note) }}
+            {{ form_widget(plant.note) }}
+        </td>
+        #}
+        <td>
+            <a href="javascript:void(0);" class="delete-row btn btn-danger">
+                <i class="fa fa-remove"></i>
+            </a>
+        </td>
+    </tr>
+{% endmacro %}
+
+<script type="text/html" id="nl">{{ _self.plantRow (form.plants.vars.prototype, form.plants.vars.id, form.plants.vars.id, form.plants.vars.id) }} </script>
+
+<hr>
+
+<p><b>Chilis</b></p>
+
+<table id="plantsTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Öffentlich <p>Privat</p></th>
+            <th>Chiliart</th>
+            <th>Chilisorte *</th>
+            <th>Anzahl <p>ausgesät *</p></th>
+            {#<th>Anzahl - Pflanzen</th>#}
+            <th>Bezugsquelle</th>
+            {#<th>Notiz</th>#}
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plant in form.plants %}
+            {{ _self.plantRow(plant, plant.children.public.vars.id, plant.children.species.vars.id, plant.children.chili.vars.id) }}
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="form-actions">
+    <button type="button" id="addPlant" class="btn bt-small btn-primary">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+</div>
+
+<hr>

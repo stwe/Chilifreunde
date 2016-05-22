@@ -1,0 +1,32 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{% block form_label %}
+    {{ parent() }}
+
+    {% if required %}
+        <span class="required" title="Pflichtfeld">*</span>
+    {% endif %}
+{% endblock %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        {{ block('form_widget') }}
+        {% if image_url is not null %}
+            {% set path = '/images/' ~ image_url %}
+            {% set thumbnail %}
+                <div class="row">
+                    <div class="col-sm-4 col-md-2">
+                        <div class="thumbnail">
+                            <img src="{{ path | imagine_filter('thumbnail_50_x_50') }}" />
+                        </div>
+                        {{ image_url }}
+                    </div>
+                </div>
+            {% endset %}
+            <p></p>
+            {{ thumbnail }}
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}

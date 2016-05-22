@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Private Chili erstellen</h2>
+    <hr>
+    {% include ":chili:form.html.twig" %}
+    <a href="{{ path('chili_private') }}" class="btn btn-primary">Meine Chilidatenbank</a>
+    <a href="{{ path('chili_public') }}" class="btn btn-primary">Öffentliche Chilidatenbank</a>
+{% endblock %}

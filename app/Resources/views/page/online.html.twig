@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Derzeitige Besucher</h2>
+    <hr>
+    {% for user in users %}
+        <i class="fa fa-user"></i> <a href="{{ path('member', {'id': user.id }) }}"> {{ user.username }}</a>
+        <hr>
+    {% endfor %}
+{% endblock %}

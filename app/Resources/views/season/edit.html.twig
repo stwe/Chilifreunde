@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Saison ändern</h2>
+    <hr>
+    {% include ":season:form.html.twig" with { "form": edit_form } %}
+    {{ form(delete_form) }}
+    <a href="{{ path('season_private') }}" class="btn btn-primary">Meine Anbaulisten</a>
+    <a href="{{ path('season_public') }}" class="btn btn-primary">Alle Anbaulisten</a>
+{% endblock %}
