@@ -39,7 +39,15 @@ class SourceDatatable extends AbstractDatatableView
             'extensions' => array(
                 'buttons' =>
                     array(
-                        'pdf'
+                        'pdf' => array(
+                            'extend' => 'pdf',
+                            'exportOptions' => array(
+                                'columns' => array(
+                                    '0', // name column
+                                    '1', // addresses column
+                                )
+                            )
+                        ),
                     ),
                 'responsive' => true
             )

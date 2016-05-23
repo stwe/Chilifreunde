@@ -76,7 +76,19 @@ class SeasonDatatable extends AbstractDatatableView
             'extensions' => array(
                 'buttons' =>
                     array(
-                        'pdf'
+                        'pdf' => array(
+                            'extend' => 'pdf',
+                            'exportOptions' => array(
+                                'columns' => array(
+                                    '0', // title column
+                                    '1', // username column
+                                    '2', // start column
+                                    '3', // end column
+                                    '4', // plants column
+                                    '5', // allPlants column
+                                )
+                            )
+                        ),
                     ),
                 'responsive' => true
             )
@@ -111,12 +123,12 @@ class SeasonDatatable extends AbstractDatatableView
             ->add('start', 'datetime', array(
                 'title' => 'Start',
                 'date_format' => 'll',
-                'name' => 'daterange'
+                'filter' => array('daterange', array()),
             ))
             ->add('end', 'datetime', array(
                 'title' => 'Ende',
                 'date_format' => 'll',
-                'name' => 'daterange'
+                'filter' => array('daterange', array()),
             ))
             ->add('plants.chili.name', 'array', array(
                 'title' => 'Sorten',
