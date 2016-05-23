@@ -261,7 +261,7 @@ class Post
      *
      * @return $this
      */
-    public function setEventStart(\DateTime $eventStart)
+    public function setEventStart(\DateTime $eventStart = null)
     {
         $this->eventStart = $eventStart;
 
@@ -285,7 +285,7 @@ class Post
      *
      * @return $this
      */
-    public function setEventEnd(\DateTime $eventEnd)
+    public function setEventEnd(\DateTime $eventEnd = null)
     {
         $this->eventEnd = $eventEnd;
 
