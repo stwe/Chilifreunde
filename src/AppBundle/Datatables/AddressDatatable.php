@@ -30,7 +30,20 @@ class AddressDatatable extends AbstractDatatableView
             'extensions' => array(
                 'buttons' =>
                     array(
-                        'pdf'
+                        'pdf' => array(
+                            'extend' => 'pdf',
+                            'exportOptions' => array(
+                                'columns' => array(
+                                    '0', // company column
+                                    '1', // name column
+                                    '2', // street column
+                                    '3', // postcode column
+                                    '4', // city column
+                                    '5', // country column
+                                    '7'  // homepage column
+                                )
+                            )
+                        ),
                     ),
                 'responsive' => true
             )

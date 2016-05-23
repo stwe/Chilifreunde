@@ -70,10 +70,13 @@ class PageController extends Controller
      */
     public function memberAction(User $user)
     {
+        $privateChilis = $this->getDoctrine()->getManager()->getRepository('AppBundle:Chili')->findPrivateChilisByUser($user);
+
         return $this->render(
             'page/member.html.twig',
             array(
-                'user' => $user
+                'user' => $user,
+                'private_chilis' => $privateChilis
             )
         );
     }

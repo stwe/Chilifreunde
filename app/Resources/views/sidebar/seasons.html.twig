@@ -2,8 +2,8 @@
     <div class="list-group-item active"><i class="glyphicon glyphicon-grain"></i> Letzte Anbaulisten</div>
     {% for season in seasons %}
         <div class="list-group-item">
-            <p><a href="{# path('season_show', {'id': season.id}) #}">{{ season.title }}</a> </p>
-            <h5><small>Erstellt von <a href="{# path('member', {'userId': season.user.id }) #}"> {{ season.user.username }}</a></small></h5>
+            <p><a href="{{ path('season_show', {'id': season.id}) }}">{{ season.title }}</a> </p>
+            <h5><small>Erstellt von <a href="{{ path('member', {'id': season.user.id }) }}"> {{ season.user.username }}</a></small></h5>
         </div>
     {% endfor %}
 </div>
