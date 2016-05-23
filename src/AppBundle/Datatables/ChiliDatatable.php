@@ -78,9 +78,6 @@ class ChiliDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('name', 'column', array(
                 'title' => 'Name',
-                'filter' => array('text', array(
-                    'search_column' => 'Drop'
-                ))
             ))
             ->add('alternativeNames', 'column', array(
                 'title' => 'Alt. Namen',
