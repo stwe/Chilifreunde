@@ -100,6 +100,14 @@ class Media
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title . ' ' . $this->fileName;
+    }
+
+    /**
      * Get id.
      *
      * @return integer 

@@ -35,3 +35,15 @@ easy_admin:
             class: AppBundle\Entity\Species
         Verwendung:
             class: AppBundle\Entity\ChiliUsage
+        Bilder:
+            class: AppBundle\Entity\Media
+            form:
+                fields:
+                    - 'title'
+                    - { property: 'image', type: 'vich_image' }
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '/images' }
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '/images' }

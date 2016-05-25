@@ -39,6 +39,12 @@ class ChiliDatatable extends AbstractDatatableView
             'extensions' => array(
                 'buttons' =>
                     array(
+                        /*
+                        'colvis' => array(
+                            'extend' => 'colvis',
+                            'text' => 'Anzeige'
+                        ),
+                        */
                         'pdf' => array(
                             'extend' => 'pdf',
                             'exportOptions' => array(

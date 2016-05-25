@@ -12,7 +12,7 @@
     {% spaceless %}
 
         {{ block('form_widget') }}
-        {% if image_url is not null %}
+        {% if image_url is defined and image_url is not null %}
             {% set path = '/images/' ~ image_url %}
             {% set thumbnail %}
                 <div class="row">
