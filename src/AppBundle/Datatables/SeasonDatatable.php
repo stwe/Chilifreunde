@@ -180,11 +180,6 @@ class SeasonDatatable extends AbstractDatatableView
                         'render_if' => function($rowEntity) {
                             return ($rowEntity['user']['username'] == $this->getUser()->getUsername());
                         },
-                        /*
-                        'render_if' => array(
-                            'user.username' => $this->getUser()->getUsername()
-                        )
-                        */
                     )
                 )
             ))
