@@ -12,6 +12,13 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+        tinymce.init({
+            selector: '#season_description',
+            language_url : '/js/de.js',
+            min_height: 200,
+            plugins: 'code',
+            menubar: 'tools'
+        });
 
         $('.season-datepicker-start').daterangepicker({
             singleDatePicker: true,

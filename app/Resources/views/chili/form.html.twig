@@ -17,6 +17,22 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        tinymce.init({
+            selector: '#chili_description',
+            language_url : '/js/de.js',
+            min_height: 200,
+            plugins: 'code',
+            menubar: 'tools'
+        });
+
+        tinymce.init({
+            selector: '#chili_growth',
+            language_url : '/js/de.js',
+            min_height: 200,
+            plugins: 'code',
+            menubar: 'tools'
+        });
+
         var index = $("#imagesTable tbody tr").length;
 
         function add() {
@@ -24,7 +40,12 @@
         }
 
         $("#addImage" ).click(function() {
-            add();
+            var counter = $("#imagesTable tbody tr").length;
+            // limit uploads
+            if (counter < {{ max_uploads_for_chilis }}) {
+                add();
+            }
+
             index = index + 1;
         });
 

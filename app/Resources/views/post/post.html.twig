@@ -10,7 +10,7 @@
         </h4>
     </div>
     <div class="panel-body">
-        {{ post.content(500) }}
+        {{ post.content(500)|raw }}
         <p class="continue"><a href="{{ path('post_show', { 'id': post.id }) }}">Beitrag lesen ...</a></p>
     </div>
     <div class="panel-footer">

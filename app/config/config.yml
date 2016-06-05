@@ -8,6 +8,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: de
+    max_uploads_for_posts: 4
+    max_uploads_for_chilis: 8
 
 framework:
     #esi:             ~
@@ -39,6 +41,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'bootstrap3.html.twig'
+    globals:
+        max_uploads_for_posts: "%max_uploads_for_posts%"
+        max_uploads_for_chilis: "%max_uploads_for_chilis%"
 
 # Doctrine Configuration
 doctrine:

@@ -11,6 +11,13 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        tinymce.init({
+            selector: '#post_content',
+            language_url : '/js/de.js',
+            min_height: 200,
+            plugins: 'code',
+            menubar: 'tools'
+        });
 
         $('.post-datepicker-start').daterangepicker({
             singleDatePicker: true,
@@ -59,7 +66,12 @@
         }
 
         $("#addImage" ).click(function() {
-            add();
+            var counter = $("#imagesTable tbody tr").length;
+            // limit uploads
+            if (counter < {{ max_uploads_for_posts }}) {
+                add();
+            }
+
             index = index + 1;
         });
 
