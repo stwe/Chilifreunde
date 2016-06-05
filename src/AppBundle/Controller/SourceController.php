@@ -246,7 +246,7 @@ class SourceController extends Controller
      * @Route("/{id}/edit", name="source_edit", options={"expose"=true})
      * @Method("GET")
      * @Template(":source:edit.html.twig")
-     * @Security("source.isOwner(user) and not source.isPublic()")
+     * @Security("has_role('ROLE_USER') and source.isOwner(user) and not source.isPublic()")
      *
      * @return array
      */
@@ -290,7 +290,7 @@ class SourceController extends Controller
      * @Route("/{id}", name="source_update")
      * @Method("PUT")
      * @Template(":source:edit.html.twig")
-     * @Security("source.isOwner(user) and not source.isPublic()")
+     * @Security("has_role('ROLE_USER') and source.isOwner(user) and not source.isPublic()")
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -336,7 +336,7 @@ class SourceController extends Controller
      *
      * @Route("/{id}", name="source_delete")
      * @Method("DELETE")
-     * @Security("source.isOwner(user) and not source.isPublic()")
+     * @Security("has_role('ROLE_USER') and source.isOwner(user) and not source.isPublic()")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

@@ -131,7 +131,7 @@ class PostController extends Controller
      * @Route("/{id}/edit", name="post_edit")
      * @Method("GET")
      * @Template(":post:edit.html.twig")
-     * @Security("post.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and post.isOwner(user)")
      *
      * @return array
      */
@@ -175,7 +175,7 @@ class PostController extends Controller
      * @Route("/{id}", name="post_update")
      * @Method("PUT")
      * @Template(":post:edit.html.twig")
-     * @Security("post.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and post.isOwner(user)")
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -225,7 +225,7 @@ class PostController extends Controller
      *
      * @Route("/{id}", name="post_delete")
      * @Method("DELETE")
-     * @Security("post.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and post.isOwner(user)")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

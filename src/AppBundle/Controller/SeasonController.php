@@ -238,7 +238,7 @@ class SeasonController extends Controller
      * @Route("/{id}/edit", name="season_edit", options={"expose"=true})
      * @Method("GET")
      * @Template(":season:edit.html.twig")
-     * @Security("season.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and season.isOwner(user)")
      *
      * @return array
      */
@@ -282,7 +282,7 @@ class SeasonController extends Controller
      * @Route("/{id}", name="season_update")
      * @Method("PUT")
      * @Template(":season:edit.html.twig")
-     * @Security("season.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and season.isOwner(user)")
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -328,7 +328,7 @@ class SeasonController extends Controller
      *
      * @Route("/{id}", name="season_delete")
      * @Method("DELETE")
-     * @Security("season.isOwner(user)")
+     * @Security("has_role('ROLE_USER') and season.isOwner(user)")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

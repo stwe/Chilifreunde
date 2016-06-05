@@ -239,7 +239,7 @@ class ChiliController extends Controller
      * @Route("/{id}/edit", name="chili_edit", options={"expose"=true})
      * @Method("GET")
      * @Template(":chili:edit.html.twig")
-     * @Security("chili.isOwner(user) and not chili.isPublic()")
+     * @Security("has_role('ROLE_USER') and chili.isOwner(user) and not chili.isPublic()")
      *
      * @return array
      */
@@ -283,7 +283,7 @@ class ChiliController extends Controller
      * @Route("/{id}", name="chili_update")
      * @Method("PUT")
      * @Template(":chili:edit.html.twig")
-     * @Security("chili.isOwner(user) and not chili.isPublic()")
+     * @Security("has_role('ROLE_USER') and chili.isOwner(user) and not chili.isPublic()")
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -333,7 +333,7 @@ class ChiliController extends Controller
      *
      * @Route("/{id}", name="chili_delete")
      * @Method("DELETE")
-     * @Security("chili.isOwner(user) and not chili.isPublic()")
+     * @Security("has_role('ROLE_USER') and chili.isOwner(user) and not chili.isPublic()")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
