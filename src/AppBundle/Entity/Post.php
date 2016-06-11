@@ -135,7 +135,7 @@ class Post
     /**
      * Is date valid.
      *
-     * @Assert\isTrue(message = "The start date must be before the end date")
+     * @Assert\IsTrue(message = "The start date must be before the end date")
      *
      * @return bool
      */
