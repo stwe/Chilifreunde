@@ -101,6 +101,7 @@ class LocationController extends Controller
      *
      * @Route("/{id}/edit", name="location_edit", options={"expose"=true})
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER') and location.isOwner(user)")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -130,6 +131,7 @@ class LocationController extends Controller
      *
      * @Route("/{id}", name="location_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER') and location.isOwner(user)")
      */
     public function deleteAction(Request $request, Location $location)
     {
