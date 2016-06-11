@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Standort ändern</h2>
+    <hr>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" class="btn btn-primary" value="Speichern" />
+    {{ form_end(edit_form) }}
+
+    <p></p>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" class="btn btn-danger" value="Löschen">
+    {{ form_end(delete_form) }}
+
+    <p></p>
+
+    <a href="{{ path('location') }}" class="btn btn-primary">Meine Standorte</a>
+{% endblock %}

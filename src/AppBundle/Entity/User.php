@@ -33,6 +33,13 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="user")
+     */
+    private $locations;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Season", mappedBy="user")
      */
     private $seasons;
@@ -84,6 +91,7 @@ class User extends BaseUser
         parent::__construct();
 
         $this->chilis = new ArrayCollection();
+        $this->locations = new ArrayCollection();
         $this->seasons = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->addresses = new ArrayCollection();
@@ -131,6 +139,44 @@ class User extends BaseUser
     public function getChilis()
     {
         return $this->chilis;
+    }
+
+    /**
+     * Add location.
+     *
+     * @param Location $location
+     *
+     * @return $this
+     */
+    public function addLocation(Location $location)
+    {
+        $this->locations[] = $location;
+
+        return $this;
+    }
+
+    /**
+     * Remove location.
+     *
+     * @param Location $location
+     *
+     * @return $this
+     */
+    public function removeLocation(Location $location)
+    {
+        $this->locations->removeElement($location);
+
+        return $this;
+    }
+
+    /**
+     * Get locations.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocations()
+    {
+        return $this->locations;
     }
 
     /**

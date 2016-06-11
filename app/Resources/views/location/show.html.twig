@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Standort</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ location.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ location.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    {% if app.user and is_granted('ROLE_USER') and location.isOwner(app.user) %}
+        <a href="{{ path('location_edit', { 'id': location.id }) }}" class="btn btn-primary">Ändern</a>
+    {% endif %}
+
+    <a href="{{ path('location') }}" class="btn btn-primary">Meine Standorte</a>
+
+{% endblock %}

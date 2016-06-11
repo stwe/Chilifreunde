@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h2>Standort erstellen</h2>
+    <hr>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-primary" value="Speichern" />
+    {{ form_end(form) }}
+
+    <p></p>
+
+    <a href="{{ path('location') }}" class="btn btn-primary">Meine Standorte</a>
+{% endblock %}

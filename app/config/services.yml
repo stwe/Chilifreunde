@@ -46,3 +46,6 @@ services:
     app.datatable.address:
         class: AppBundle\Datatables\AddressDatatable
         parent: sg_datatables.datatable.abstract
+    app.datatable.location:
+        class: AppBundle\Datatables\LocationDatatable
+        parent: sg_datatables.datatable.abstract

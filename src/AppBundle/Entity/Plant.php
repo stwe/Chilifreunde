@@ -79,6 +79,14 @@ class Plant
     private $source;
 
     /**
+     * @var Location
+     *
+     * @ORM\ManyToOne(targetEntity="Location")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=true)
+     */
+    private $location;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="note", type="string", length=255, nullable=true)
@@ -221,6 +229,30 @@ class Plant
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Set location.
+     *
+     * @param Location $location
+     *
+     * @return $this
+     */
+    public function setLocation(Location $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location.
+     *
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 
     /**

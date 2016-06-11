@@ -57,7 +57,10 @@ class MenuBuilder implements ContainerAwareInterface
         $menu['Stammdaten']->addChild('Meine Bezugsquellen', array('route' => 'source_private'))
             ->setAttribute('icon', 'glyphicon glyphicon-shopping-cart');
         $menu['Stammdaten']->addChild('Öffentliche Bezugsquellen', array('route' => 'source_public'))
-            ->setAttribute('icon', 'glyphicon glyphicon-shopping-cart');
+            ->setAttribute('icon', 'glyphicon glyphicon-shopping-cart')
+            ->setAttribute('divider_append', true);
+        $menu['Stammdaten']->addChild('Meine Standorte', array('route' => 'location'))
+            ->setAttribute('icon', 'glyphicon glyphicon-screenshot');
 
         return $menu;
     }

@@ -351,7 +351,7 @@ class SourceController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('source'));
+        return $this->redirect($this->generateUrl('source_private'));
     }
 
     /**
