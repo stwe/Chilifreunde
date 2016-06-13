@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Species
@@ -40,6 +41,21 @@ class Species
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Chili", mappedBy="species")
+     */
+    private $chilis;
+
+    /**
+     * Species constructor.
+     */
+    public function __construct()
+    {
+        $this->chilis = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -105,5 +121,43 @@ class Species
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add chili.
+     *
+     * @param Chili $chili
+     *
+     * @return $this
+     */
+    public function addChili(Chili $chili)
+    {
+        $this->chilis[] = $chili;
+
+        return $this;
+    }
+
+    /**
+     * Remove chili.
+     *
+     * @param Chili $chili
+     *
+     * @return $this
+     */
+    public function removeChili(Chili $chili)
+    {
+        $this->chilis->removeElement($chili);
+
+        return $this;
+    }
+
+    /**
+     * Get chilis.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChilis()
+    {
+        return $this->chilis;
     }
 }

@@ -80,7 +80,7 @@
                     if ('' != species) {
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('get_chilis') }}",
+                            url: "{{ url('get_chilis_to_create_season') }}",
                             data: {'species_id': species, 'public': pub},
                             success: function (data) {
                                 $("#" + chiliId).html('');
@@ -101,7 +101,7 @@
                     if ('' != species) {
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('get_chilis') }}",
+                            url: "{{ url('get_chilis_to_create_season') }}",
                             data: {'species_id': species, 'public': pub},
                             success: function (data) {
                                 $("#" + chiliId).html('');
@@ -119,7 +119,7 @@
         function ajaxRequest(index, species, pub) {
             $.ajax({
                 type: "POST",
-                url: "{{ url('get_chilis') }}",
+                url: "{{ url('get_chilis_to_create_season') }}",
                 data: {'species_id': species, 'public': pub},
                 success: function (data) {
                     $("#season_plants_" + index + "_chili").html('');

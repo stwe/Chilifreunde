@@ -94,4 +94,26 @@ class ChiliRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Find public and private User Chilis.
+     *
+     * @param string        $name
+     * @param UserInterface $user
+     *
+     * @return array
+     */
+    public function findChilis($name, UserInterface $user)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('c');
+        $qb->join('c.user', 'u');
+        $qb->where('c.public = true');
+        $qb->orWhere('c.public = false AND u = :user');
+        $qb->andWhere('c.name LIKE :name');
+        $qb->setParameter('user', $user);
+        $qb->setParameter('name', '%' . $name . '%');
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -13,6 +13,20 @@ use Sg\DatatablesBundle\Datatable\View\Style;
 class PlantDatatable extends AbstractDatatableView
 {
     /**
+     * Get User.
+     *
+     * @return mixed|null
+     */
+    private function getUser()
+    {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->securityToken->getToken()->getUser();
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getLineFormatter()
@@ -80,14 +94,40 @@ class PlantDatatable extends AbstractDatatableView
             ->add('quantity', 'column', array(
                 'title' => 'Pflanzen',
             ))
-            ->add('note', 'column', array(
-                'title' => 'Notiz',
+            ->add('location.name', 'column', array(
+                'title' => 'Standort',
             ))
             ->add('source.name', 'column', array(
                 'title' => 'Bezugsquelle',
             ))
             ->add('season.id', 'column', array(
                 'visible' => false,
+            ))
+            ->add('season.user.username', 'column', array(
+                'visible' => false,
+            ))
+            ->add(null, 'action', array(
+                'title' => 'Aktionen',
+                'actions' => array(
+                    array(
+                        'route' => 'plant_edit',
+                        'route_parameters' => array(
+                            'seasonId' => 'season.id',
+                            'id' => 'id'
+                        ),
+                        'label' => 'Ändern',
+                        'icon' => 'glyphicon glyphicon-edit',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => 'Ändern',
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button'
+                        ),
+                        'render_if' => function($rowEntity) {
+                            return ($rowEntity['season']['user']['username'] == $this->getUser()->getUsername());
+                        },
+                    )
+                )
             ))
         ;
     }

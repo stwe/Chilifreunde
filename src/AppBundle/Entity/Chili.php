@@ -94,7 +94,7 @@ class Chili
     /**
      * @var Species
      *
-     * @ORM\ManyToOne(targetEntity="Species")
+     * @ORM\ManyToOne(targetEntity="Species", inversedBy="chilis")
      * @ORM\JoinColumn(name="species_id", referencedColumnName="id")
      */
     private $species;

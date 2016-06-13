@@ -26,6 +26,8 @@ class LocationController extends Controller
      *
      * @Route("/", name="location")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -38,7 +40,11 @@ class LocationController extends Controller
     }
 
     /**
+     * Get Locations for datatable.
+     *
      * @Route("/results", name="location_results")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexResultsAction()
     {
@@ -53,8 +59,12 @@ class LocationController extends Controller
     /**
      * Creates a new Location entity.
      *
+     * @param Request $request
+     *
      * @Route("/new", name="location_new")
      * @Method({"GET", "POST"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -129,9 +139,14 @@ class LocationController extends Controller
     /**
      * Deletes a Location entity.
      *
+     * @param Request  $request
+     * @param Location $location
+     *
      * @Route("/{id}", name="location_delete")
      * @Method("DELETE")
      * @Security("has_role('ROLE_USER') and location.isOwner(user)")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Location $location)
     {

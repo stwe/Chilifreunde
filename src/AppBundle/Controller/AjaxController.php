@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Chili;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +21,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class AjaxController extends Controller
 {
     /**
-     * Get Chilis by Species.
+     * Get Chilis to create a Season.
      *
      * @param Request $request
      *
-     * @Route("/get-chilis", name="get_chilis")
+     * @Route("/season/get-chilis", name="get_chilis_to_create_season")
      *
      * @return JsonResponse|Response
      */
-    public function ajaxAction(Request $request)
+    public function getChilisToCreateSeasonAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $id = $request->request->get('species_id');
@@ -54,6 +56,46 @@ class AjaxController extends Controller
         }
 
         return new Response('Bad request.', 400);
+    }
+
+    /**
+     * Get Chilis for editing Plant.
+     *
+     * @param Request $request
+     *
+     * @Route("/get_chilis", name="get_chilis")
+     *
+     * @return Response
+     */
+    public function getChilisAction(Request $request)
+    {
+        $value = $request->get('q');
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Chili');
+        $chilis = $repository->findChilis($value, $this->getUser());
+
+        $json = array('data' => array());
+
+        foreach ($chilis as $chili) {
+            $species = 'unbekannte Art';
+            if ($chili->getSpecies()) {
+                $species = $chili->getSpecies()->getName();
+            }
+
+            $values = array(
+                'id' => $chili->getId(),
+                'name' => $chili->getName(),
+                'species' => $species
+            );
+
+            array_push($json, $values);
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($json));
+
+        return $response;
     }
 
     /**
