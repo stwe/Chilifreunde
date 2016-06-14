@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * Location controller.
@@ -52,6 +53,15 @@ class LocationController extends Controller
         $datatable->buildDatatable();
 
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        $user = $this->getUser();
+        $function = function(QueryBuilder $qb) use ($user)
+        {
+            $qb->andWhere('location.user = :user');
+            $qb->setParameter('user', $user);
+        };
+
+        $query->addWhereAll($function);
 
         return $query->getResponse();
     }

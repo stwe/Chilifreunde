@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Location
  *
  * @ORM\Table(name="location")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\LocationRepository")
  *
  * @package AppBundle\Entity
  */

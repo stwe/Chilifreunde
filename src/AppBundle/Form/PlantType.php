@@ -203,12 +203,4 @@ class PlantType extends AbstractType
             'data_class' => 'AppBundle\Entity\Plant'
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'appbundle_plant';
-    }
 }

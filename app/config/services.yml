@@ -8,14 +8,21 @@ services:
     app.form.type.profile:
         class: AppBundle\Form\ProfileType
         tags:
-            - { name: form.type, alias: app_user_profile }
+            - { name: form.type }
     app.form.type.plant:
         class: AppBundle\Form\PlantType
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
         tags:
-            - { name: form.type, alias: appbundle_plant }
+            - { name: form.type }
+    app.form.type.singleplant:
+        class: AppBundle\Form\SinglePlantType
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+        tags:
+            - { name: form.type }
     app.form.extension.file:
         class: AppBundle\Form\Extension\FileTypeExtension
         tags:
