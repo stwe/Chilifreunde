@@ -49,11 +49,6 @@ class MenuBuilder implements ContainerAwareInterface
             ->setAttribute('dropdown', true)
             ->setAttribute('icon', 'glyphicon glyphicon-cog');
 
-        /*
-        $menu['Stammdaten']->addChild('Meine Standorte', array('route' => 'address_new'))
-            ->setAttribute('icon', 'glyphicon glyphicon-home');
-        */
-
         $menu['Stammdaten']->addChild('Meine Bezugsquellen', array('route' => 'source_private'))
             ->setAttribute('icon', 'glyphicon glyphicon-shopping-cart');
         $menu['Stammdaten']->addChild('Öffentliche Bezugsquellen', array('route' => 'source_public'))
