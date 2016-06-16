@@ -1,0 +1,71 @@
+easy_admin:
+    site_name: 'Chilifreunde.eu'
+    list:
+        actions: ['show']
+    entities:
+        Benutzer:
+            class: AppBundle\Entity\User
+            list:
+                fields:
+                    - id
+                    - username
+                    - email
+                    - enabled
+                    - approved
+            form:
+                fields:
+                    - username
+                    - email
+                    - roles
+                    - enabled
+                    - approved
+                    - plainPassword
+        Adressen:
+            class: AppBundle\Entity\Address
+        Chilis:
+            class: AppBundle\Entity\Chili
+            form:
+                fields:
+                    - 'name'
+                    - 'alternativeNames'
+                    - { property: 'images', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\MediaType' } }
+                    - 'heat'
+                    - 'description'
+                    - 'growth'
+                    - 'origin'
+                    - 'fruitcolor'
+                    - 'maturity'
+                    - 'species'
+                    - 'usages'
+                    - 'public'
+                    - 'user'
+        Anbaulisten:
+            class: AppBundle\Entity\Season
+        Beiträge:
+            class: AppBundle\Entity\Post
+        Bezugsquellen:
+            class: AppBundle\Entity\Source
+        Standorte:
+            class: AppBundle\Entity\Location
+        Fruchtfarben:
+            class: AppBundle\Entity\Fruitcolor
+        Schärfegrade:
+            class: AppBundle\Entity\Heat
+        Reifezeiten:
+            class: AppBundle\Entity\Maturity
+        Arten:
+            class: AppBundle\Entity\Species
+        Verwendung:
+            class: AppBundle\Entity\ChiliUsage
+        Bilder:
+            class: AppBundle\Entity\Media
+            form:
+                fields:
+                    - 'title'
+                    - { property: 'image', type: 'vich_image' }
+            list:
+                fields:
+                    - { property: 'fileName', type: 'image', base_path: '/images' }
+            show:
+                fields:
+                    - { property: 'fileName', type: 'image', base_path: '/images' }
