@@ -61,7 +61,9 @@ class ChiliDatatable extends AbstractDatatableView
                         ),
                     ),
                 'responsive' => true
-            )
+            ),
+            'highlight' => true,
+            'highlight_color' => 'red'
         ));
 
         $this->ajax->set(array(
