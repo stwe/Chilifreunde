@@ -89,6 +89,7 @@ class ChiliDatatable extends AbstractDatatableView
             ))
             ->add('alternativeNames', 'column', array(
                 'title' => 'Alt. Namen',
+                'render' => 'renderAlternativeNames'
             ))
             ->add('images.fileName', 'gallery', array(
                 'title' => 'Bilder',

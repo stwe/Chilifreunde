@@ -4,4 +4,19 @@
     <h2>{{ title }}</h2>
     <hr>
     {{ datatable_render(datatable) }}
+
+    <script>
+        function renderAlternativeNames(data, type, row, meta) {
+            var s = ' ';
+            for (var index = 0; index < data.length; ++index) {
+                if (0 == index) {
+                    s += data[index];
+                } else {
+                    s += ', ' + data[index];
+                }
+            }
+
+            return s;
+        }
+    </script>
 {% endblock %}
