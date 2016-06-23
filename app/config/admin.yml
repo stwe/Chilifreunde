@@ -7,42 +7,198 @@ easy_admin:
             class: AppBundle\Entity\User
             list:
                 fields:
-                    - id
-                    - username
-                    - email
-                    - enabled
-                    - approved
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'username', label: 'Benutzername' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'enabled', label: 'Freigegeben' }
+                    - { property: 'approved', label: 'Genehmigt' }
+                    - { property: 'locked', label: 'Gesperrt' }
             form:
                 fields:
-                    - username
-                    - email
-                    - roles
-                    - enabled
-                    - approved
-                    - plainPassword
+                    - { property: 'username', label: 'Benutzername' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'plainPassword', label: 'Passwort'}
+                    - { property: 'roles', label: 'Rollen' }
+                    - { property: 'enabled', label: 'Freigegeben' }
+                    - { property: 'approved', label: 'Genehmigt' }
+                    - { property: 'locked', label: 'Gesperrt' }
+                    - { property: 'addresses', label: 'Adressen', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\AddressType' } }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'username', label: 'Benutzername' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'enabled', label: 'Freigegeben' }
+                    - { property: 'approved', label: 'Genehmigt' }
+                    - { property: 'locked', label: 'Gesperrt' }
+                    - { property: 'lastLogin', label: 'Letzter Login' }
+                    - { property: 'addresses', label: 'Adressen' }
         Adressen:
             class: AppBundle\Entity\Address
-        Chilis:
-            class: AppBundle\Entity\Chili
+            disabled_actions: ['new']
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'company', label: 'Firma' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'street', label: 'Straße' }
+                    - { property: 'postcode', label: 'PLZ' }
+                    - { property: 'city', label: 'Ort' }
+                    - { property: 'country', label: 'Land' }
             form:
                 fields:
-                    - 'name'
-                    - 'alternativeNames'
-                    - { property: 'images', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\MediaType' } }
-                    - 'heat'
-                    - 'description'
-                    - 'growth'
-                    - 'origin'
-                    - 'fruitcolor'
-                    - 'maturity'
-                    - 'species'
-                    - 'usages'
-                    - 'public'
-                    - 'user'
+                    - { property: 'company', label: 'Firma' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'street', label: 'Straße' }
+                    - { property: 'postcode', label: 'PLZ' }
+                    - { property: 'city', label: 'Ort' }
+                    - { property: 'country', label: 'Land' }
+                    - { property: 'phoneNumber', label: 'Telefon' }
+                    - { property: 'homepage', label: 'Homepage' }
+                    - { property: 'lat', label: 'Latitude' }
+                    - { property: 'lng', label: 'Longitude' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'company', label: 'Firma' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'street', label: 'Straße' }
+                    - { property: 'postcode', label: 'PLZ' }
+                    - { property: 'city', label: 'Ort' }
+                    - { property: 'country', label: 'Land' }
+                    - { property: 'phoneNumber', label: 'Telefon' }
+                    - { property: 'homepage', label: 'Homepage' }
+                    - { property: 'lat', label: 'Latitude' }
+                    - { property: 'lng', label: 'Longitude' }
+                    - { property: 'user', label: 'Adresse gehört zu Benutzer' }
+                    - { property: 'source', label: 'Adresse gehört zu Bezugsquelle' }
+        Bilder:
+            class: AppBundle\Entity\Media
+            disabled_actions: ['new']
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'fileName', type: 'image', base_path: '/images' }
+            form:
+                fields:
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'image', type: 'vich_image' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'fileName', type: 'image', base_path: '/images' }
+                    - { property: 'createdAt', label: 'Erstellt am' }
+                    - { property: 'updatedAt', label: 'Zuletzt geändert am' }
+        Chilis:
+            class: AppBundle\Entity\Chili
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'alternativeNames', label: 'Alt. Namen' }
+                    - { property: 'heat', label: 'Schärfe' }
+                    - { property: 'fruitcolor', label: 'Fruchtfarbe' }
+                    - { property: 'species', label: 'Art' }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'alternativeNames', label: 'Alt. Namen' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'heat', label: 'Schärfe' }
+                    - { property: 'origin', label: 'Herkunft' }
+                    - { property: 'growth', label: 'Wuchs' }
+                    - { property: 'fruitcolor', label: 'Fruchtfarbe' }
+                    - { property: 'maturity', label: 'Reifezeit' }
+                    - { property: 'species', label: 'Art' }
+                    - { property: 'usages', label: 'Verwendung' }
+                    - { property: 'images', label: 'Bilder', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\MediaType' } }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'alternativeNames', label: 'Alt. Namen' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'heat', label: 'Schärfe' }
+                    - { property: 'origin', label: 'Herkunft' }
+                    - { property: 'growth', label: 'Wuchs' }
+                    - { property: 'fruitcolor', label: 'Fruchtfarbe' }
+                    - { property: 'maturity', label: 'Reifezeit' }
+                    - { property: 'species', label: 'Art' }
+                    - { property: 'usages', label: 'Verwendung' }
+                    - { property: 'images', label: 'Bilder' }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
+                    - { property: 'createdAt', label: 'Erstellt am' }
+                    - { property: 'updatedAt', label: 'Zuletzt geändert am' }
         Anbaulisten:
             class: AppBundle\Entity\Season
-        Beiträge:
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'start', label: 'Start' }
+                    - { property: 'end', label: 'Ende' }
+                    - { property: 'plants', label: 'Pflanzen' }
+                    - { property: 'posts', label: 'Postings' }
+                    - { property: 'user', label: 'Benutzer' }
+            form:
+                fields:
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'start', label: 'Start' }
+                    - { property: 'end', label: 'Ende' }
+                    - { property: 'plants', label: 'Pflanzen', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\SinglePlantType' } }
+                    - { property: 'user', label: 'Benutzer' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'start', label: 'Start' }
+                    - { property: 'end', label: 'Ende' }
+                    - { property: 'plants', label: 'Pflanzen' }
+                    - { property: 'posts', label: 'Postings' }
+                    - { property: 'user', label: 'Benutzer' }
+                    - { property: 'createdAt', label: 'Erstellt am' }
+                    - { property: 'updatedAt', label: 'Zuletzt geändert am' }
+        Postings:
             class: AppBundle\Entity\Post
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'season', label: 'Saison' }
+                    - { property: 'publishedAt', label: 'Veröffentlicht' }
+                    - { property: 'user', label: 'Benutzer' }
+            form:
+                fields:
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'content', label: 'Beitrag' }
+                    - { property: 'season', label: 'Saison' }
+                    - { property: 'eventStart', label: 'Ereignis von' }
+                    - { property: 'eventEnd', label: 'Ereignis bis' }
+                    - { property: 'publishedAt', label: 'Veröffentlicht' }
+                    - { property: 'images', label: 'Bilder', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\MediaType' } }
+                    - { property: 'user', label: 'Benutzer' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'title', label: 'Titel' }
+                    - { property: 'slug', label: 'Slug' }
+                    - { property: 'content', label: 'Beitrag' }
+                    - { property: 'season', label: 'Saison' }
+                    - { property: 'eventStart', label: 'Ereignis von' }
+                    - { property: 'eventEnd', label: 'Ereignis bis' }
+                    - { property: 'publishedAt', label: 'Veröffentlicht' }
+                    - { property: 'updatedAt', label: 'Zuletzt geändert am' }
+                    - { property: 'images', label: 'Bilder' }
+                    - { property: 'user', label: 'Benutzer' }
         Bezugsquellen:
             class: AppBundle\Entity\Source
         Standorte:
@@ -57,15 +213,3 @@ easy_admin:
             class: AppBundle\Entity\Species
         Verwendung:
             class: AppBundle\Entity\ChiliUsage
-        Bilder:
-            class: AppBundle\Entity\Media
-            form:
-                fields:
-                    - 'title'
-                    - { property: 'image', type: 'vich_image' }
-            list:
-                fields:
-                    - { property: 'fileName', type: 'image', base_path: '/images' }
-            show:
-                fields:
-                    - { property: 'fileName', type: 'image', base_path: '/images' }

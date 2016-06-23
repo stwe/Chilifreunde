@@ -366,7 +366,7 @@ class User extends BaseUser
      *
      * @return $this
      */
-    public function setIsApproved($approved)
+    public function setApproved($approved)
     {
         $this->approved = $approved;
 
