@@ -1,7 +1,26 @@
 easy_admin:
-    site_name: 'Chilifreunde.eu'
+    site_name: 'Backend'
     list:
         actions: ['show']
+    design:
+        menu:
+            - { label: 'Chilifreunde.eu', route: 'homepage' }
+            - { label: 'Inhalte' }
+            - Chilis
+            - Anbaulisten
+            - Postings
+            - Bilder
+            - { label: 'Stammdaten' }
+            - Arten
+            - Scoville
+            - Fruchtfarben
+            - Reifezeiten
+            - Verwendung
+            - { label: 'Benutzerdaten' }
+            - Benutzer
+            - Adressen
+            - Bezugsquellen
+            - Standorte
     entities:
         Benutzer:
             class: AppBundle\Entity\User
@@ -201,15 +220,127 @@ easy_admin:
                     - { property: 'user', label: 'Benutzer' }
         Bezugsquellen:
             class: AppBundle\Entity\Source
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'addresses', label: 'Adressen' }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'addresses', label: 'Adressen', type: 'collection', type_options: { by_reference: false, entry_type: 'AppBundle\Form\AddressType' } }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'addresses', label: 'Adressen' }
+                    - { property: 'public', label: 'Öffentlich' }
+                    - { property: 'user', label: 'Benutzer' }
         Standorte:
             class: AppBundle\Entity\Location
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'user', label: 'Benutzer' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'user', label: 'Benutzer' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'user', label: 'Benutzer' }
         Fruchtfarben:
             class: AppBundle\Entity\Fruitcolor
-        Schärfegrade:
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'color', label: 'Fruchtfarbe' }
+            form:
+                fields:
+                    - { property: 'color', label: 'Fruchtfarbe' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'color', label: 'Fruchtfarbe' }
+        Scoville:
             class: AppBundle\Entity\Heat
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'heat', label: 'Schärfe' }
+                    - { property: 'scovilleMin', label: 'Scoville von' }
+                    - { property: 'scovilleMax', label: 'Scoville bis' }
+                    - { property: 'description', label: 'Beschreibung' }
+            form:
+                fields:
+                    - { property: 'value', label: 'Schärfe als Zahl' }
+                    - { property: 'heat', label: 'Schärfe als Zeichenkette' }
+                    - { property: 'scovilleMin', label: 'Scoville von' }
+                    - { property: 'scovilleMax', label: 'Scoville bis' }
+                    - { property: 'description', label: 'Beschreibung' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'value', label: 'Schärfe als Zahl' }
+                    - { property: 'heat', label: 'Schärfe als Zeichenkette' }
+                    - { property: 'scovilleMin', label: 'Scoville von' }
+                    - { property: 'scovilleMax', label: 'Scoville bis' }
+                    - { property: 'description', label: 'Beschreibung' }
         Reifezeiten:
             class: AppBundle\Entity\Maturity
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'days', label: 'Reifezeit' }
+            form:
+                fields:
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'days', label: 'Reifezeit' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'days', label: 'Reifezeit' }
         Arten:
             class: AppBundle\Entity\Species
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'chilis', label: 'Chilis' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Beschreibung' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Beschreibung' }
+                    - { property: 'chilis', label: 'Chilis' }
         Verwendung:
             class: AppBundle\Entity\ChiliUsage
+            list:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'chilis', label: 'Chilis' }
+            show:
+                fields:
+                    - { property: 'id', label: 'Id' }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'chilis', label: 'Chilis' }
