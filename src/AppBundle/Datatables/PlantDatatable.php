@@ -123,8 +123,8 @@ class PlantDatatable extends AbstractDatatableView
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
-                        'render_if' => function($rowEntity) {
-                            return ($rowEntity['season']['user']['username'] == $this->getUser()->getUsername());
+                        'render_if' => function($row) {
+                            return ($row['season']['user']['username'] == $this->getUser()->getUsername());
                         },
                     )
                 )

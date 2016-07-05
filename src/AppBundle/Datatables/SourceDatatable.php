@@ -120,9 +120,9 @@ class SourceDatatable extends AbstractDatatableView
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
-                        'render_if' => array(
-                            'public' => false
-                        )
+                        'render_if' => function($row) {
+                            return ($row['public'] == false);
+                        }
                     )
                 )
             ))

@@ -60,7 +60,6 @@ class SeasonDatatable extends AbstractDatatableView
                     'route' => $this->router->generate('season_new'),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
-                    'role' => 'ROLE_USER',
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->translator->trans('datatables.actions.new'),
@@ -177,8 +176,8 @@ class SeasonDatatable extends AbstractDatatableView
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
-                        'render_if' => function($rowEntity) {
-                            return ($rowEntity['user']['username'] == $this->getUser()->getUsername());
+                        'render_if' => function($row) {
+                            return ($row['user']['username'] == $this->getUser()->getUsername());
                         },
                     )
                 )
