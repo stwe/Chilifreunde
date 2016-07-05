@@ -44,7 +44,6 @@ class SourceController extends Controller
                     'route' => $this->get('router')->generate('source_new'),
                     'label' => $this->get('translator')->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
-                    'role' => 'ROLE_USER',
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->get('translator')->trans('datatables.actions.new'),
