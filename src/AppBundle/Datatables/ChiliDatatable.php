@@ -70,7 +70,7 @@ class ChiliDatatable extends AbstractDatatableView
             'url' => $this->router->generate('chili_private_results'),
             'type' => 'GET'
         ));
-        
+
         $this->options->set(array(
             'class' => Style::BOOTSTRAP_3_STYLE . ' table-condensed',
             'individual_filtering' => true,

@@ -5,4 +5,31 @@
     {% if not is_granted('ROLE_USER') %}
         <a href="{{ path('fos_user_security_login') }}">Melden Sie sich an</a> oder <a href="{{ path('fos_user_registration_register') }}">registrieren</a> Sie sich kostenlos mit Ihrer E-Mail.
     {% endif %}
+    <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ '/img/Early Jalapeno.jpg' | imagine_filter('thumbnail_192_x_200') }}">
+                <div class="caption">
+                    <h3>Early Jalapeno</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ '/img/Pimiento de Padron.jpg' | imagine_filter('thumbnail_192_x_200') }}">
+                <div class="caption">
+                    <h3>Pimiento de Padron</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ '/img/Miniature Red Bell.jpg' | imagine_filter('thumbnail_192_x_200') }}">
+                <div class="caption">
+                    <h3>Miniature Red Bell</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

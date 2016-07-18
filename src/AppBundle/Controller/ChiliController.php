@@ -44,9 +44,6 @@ class ChiliController extends Controller
                     'route' => $this->get('router')->generate('chili_new'),
                     'label' => $this->get('translator')->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
-                    'render_if_role' => function() {
-                        return ($this->isGranted('ROLE_USER'));
-                    },
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->get('translator')->trans('datatables.actions.new'),
