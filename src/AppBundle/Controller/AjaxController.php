@@ -99,6 +99,23 @@ class AjaxController extends Controller
     }
 
     /**
+     * Get all Chilis to sync.
+     *
+     * @Route("/sync_chilis", name="sync_chilis")
+     *
+     * @return JsonResponse
+     */
+    public function getNotSyncedChilisAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Chili');
+        $chilis = $repository->findAllChilis();
+
+        return new JsonResponse($chilis);
+    }
+
+    /**
      * String to boolean.
      *
      * @param string $str

@@ -116,4 +116,18 @@ class ChiliRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Find all public Chilis.
+     *
+     * @return array
+     */
+    public function findAllChilis()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('c');
+        $qb->where('c.public = true');
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }
